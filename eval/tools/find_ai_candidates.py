@@ -61,7 +61,7 @@ def search_repos(query: str, pages: int) -> list[str]:
         url = "https://api.github.com/search/commits?per_page=100&sort=committer-date&page="
         url += f"{page}&q=" + urllib.parse.quote(query)
         headers = {"Accept": "application/vnd.github+json", "User-Agent": "margin-eval"}
-        secret = get_settings().github_token  # GITHUB_TOKEN env var or .env
+        secret = get_settings().github_token  # GITHUB_TOKEN env var or MARGIN_ENV_FILE
         token = secret.get_secret_value() if secret else None
         if token:
             headers["Authorization"] = f"Bearer {token}"
