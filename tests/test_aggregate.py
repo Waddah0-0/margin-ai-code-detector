@@ -68,6 +68,15 @@ def test_confidence_levels() -> None:
     assert level == "low" and len(reasons) == 3
 
 
+def test_confidence_reasons_count_in_plain_words() -> None:
+    _, reasons = confidence_level(ConfidenceFacts(0, 1, 0.8, 0.9), M)
+    assert "no kind of signal gave any evidence" in reasons
+    assert "only 1 file could be analysed" in reasons
+    _, reasons = confidence_level(ConfidenceFacts(1, 2, 0.8, 0.9), M)
+    assert "evidence came from only 1 kind of signal" in reasons
+    assert "only 2 files could be analysed" in reasons
+
+
 def test_repo_model_parameters_default_to_v0_behaviour() -> None:
     files = [file(0.8), file(0.6)]
     assert M.repo_intercept == 0.0 and M.repo_file_coefficient == 1.0

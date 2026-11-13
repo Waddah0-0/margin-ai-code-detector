@@ -4,6 +4,12 @@ All notable changes to this agent are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+- The confidence reasons count in plain words: "only 1 file could be analysed", "1 kind of
+  signal", and "no kind of signal gave any evidence" instead of "0 kind(s) of signals".
+
 ## [0.2.1] - 2026-10-21
 
 ### Security

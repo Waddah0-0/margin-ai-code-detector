@@ -15,6 +15,11 @@ from ai_code_detector.methodology import Methodology
 from ai_code_detector.models import Confidence, FileScore, SignalHit
 
 
+def _count(n: int, one: str, many: str) -> str:
+    """'1 file', '3 files'."""
+    return f"{n} {one if n == 1 else many}"
+
+
 def sigmoid(x: float) -> float:
     return 1.0 / (1.0 + math.exp(-x))
 
@@ -152,10 +157,11 @@ def confidence_level(
     c = methodology.section("confidence")
     high_checks = [
         (facts.families >= c["high_families"],
-         f"evidence came from {facts.families} kinds of signals (high confidence needs "
-         f"{c['high_families']})"),
+         f"evidence came from {_count(facts.families, 'kind', 'kinds')} of signals (high "
+         f"confidence needs {c['high_families']})"),
         (facts.files >= c["high_files"],
-         f"{facts.files} files could be analysed (high confidence needs {c['high_files']})"),
+         f"{_count(facts.files, 'file', 'files')} could be analysed (high confidence needs "
+         f"{c['high_files']})"),
         (facts.width <= c["high_max_width"],
          f"the range is {facts.width:.2f} wide (high confidence needs "
          f"at most {c['high_max_width']})"),
@@ -164,8 +170,10 @@ def confidence_level(
     ]  # fmt: skip
     medium_checks = [
         (facts.families >= c["medium_families"],
-         f"evidence came from only {facts.families} kind(s) of signals"),
-        (facts.files >= c["medium_files"], f"only {facts.files} files could be analysed"),
+         f"evidence came from only {_count(facts.families, 'kind', 'kinds')} of signal"
+         if facts.families else "no kind of signal gave any evidence"),
+        (facts.files >= c["medium_files"],
+         f"only {_count(facts.files, 'file', 'files')} could be analysed"),
         (facts.width <= c["medium_max_width"], f"the range is wide ({facts.width:.2f})"),
     ]  # fmt: skip
     uncalibrated = (
