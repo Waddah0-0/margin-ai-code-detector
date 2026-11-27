@@ -4,6 +4,12 @@ All notable changes to this agent are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.3] - 2026-11-27
+
+### Added
+- Marked the agent with `requires_git = True` so interfaces can warn clearly when system `git`
+  is not installed.
+
 ## [0.2.2] - 2026-11-20
 
 ### Fixed

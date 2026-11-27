@@ -1,6 +1,6 @@
 [project]
 name = "margin-ai-code-detector"
-version = "0.2.2"
+version = "0.2.3"
 description = "Estimates how likely a codebase was written with AI assistance, as a range with the evidence for and against."
 readme = "README.md"
 requires-python = ">=3.11"
